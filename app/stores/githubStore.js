@@ -10,11 +10,12 @@ var UserStore = Reflux.createStore({
       this.listenTo(actions.searchUser, this.searchUser);
     },
     searchUser(name) {
+      var _this = this;
       request
         .get(UserSearchUrl)
         .query({q: name})
         .end((res) => {
-          this.trigger(res.body.items);
+          _this.trigger(res.body.items);
         });
     },
 });

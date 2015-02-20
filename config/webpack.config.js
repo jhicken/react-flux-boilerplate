@@ -1,7 +1,8 @@
 module.exports = {
   entry: "./app/app.jsx",
   output: {
-    filename: "bundle.js"
+    filename: "bundle.js",
+    sourceMapFilename:"bundle.js.map"
   },
   devtool: "#inline-source-map",
   resolve: {
@@ -9,7 +10,7 @@ module.exports = {
   },
   module: {
     loaders: [
-    {test: /\.jsx?$/, loader: 'jsx-loader?harmony&stripTypes'}
+        { test: /\.jsx$|\.js$/, exclude: /node_modules/, loader: "babel-loader"}
     ]
   }
 };
