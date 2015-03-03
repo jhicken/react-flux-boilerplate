@@ -1,13 +1,10 @@
-
 var React = require('react');
-var Reflux = require('reflux');
 var store = require('../../stores/githubStore');
 var actions = require('../../actions/githubActions');
 
-
 var SearchInput = React.createClass({
   handleSearch(event) {
-    actions.searchUser(this.refs.searchInput.getDOMNode().value);
+    actions.searchUser.push(this.refs.searchInput.getDOMNode().value);
   },
   render() {
     return (
@@ -25,14 +22,21 @@ var SearchInput = React.createClass({
 });
 
 var SearchResults = React.createClass({
-  mixins: [Reflux.connect(store,"searchResults")],
   getInitialState() {
     return {
       searchResults: {
-        repos: [],
         user: {}
       }
     };
+  },
+  componentWillMount() {
+    store.user.onValue((user) => {
+      this.setState({
+        searchResults: {
+          user
+        }
+      })
+    });
   },
   render() {
     var results;
@@ -42,7 +46,7 @@ var SearchResults = React.createClass({
           <UserInfo name={this.state.searchResults.user.login} imgSrc={this.state.searchResults.user.avatar_url} />
           <div className="repo-list">
             <ul>
-              {this.state.searchResults && this.state.searchResults.repos && this.state.searchResults.repos.map((repo) => {
+              {this.state.searchResults && this.state.searchResults.user.repos && this.state.searchResults.user.repos.map((repo) => {
                 return <li key={repo.id}>{repo.name}</li>
               })}
             </ul>
