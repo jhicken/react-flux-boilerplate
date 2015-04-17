@@ -1,40 +1,28 @@
 'use strict';
 
-jest.dontMock('../header');
+jest.dontMock('../header.jsx');
 
-jest.dontMock('../../../../config/testHelper');
 
-var testHelper = require('../../../../config/testHelper');
-console.log(testHelper);
+var React = require('react/addons');
+var Header = require('../header.jsx');
+var StubRouterContext = require("../../../../config/stubRouterContext.jsx");
+var TestUtils = React.addons.TestUtils;
+
+
 describe('Header', function() {
 
   it('sets class name', function() {
-    var React = require('react/addons');
-    //var Router = require('react-router');
-    var Header = React.createFactory(require('../header'));
-    var TestUtils = React.addons.TestUtils;
-    //var stubbed = testHelper.makeStubbedDescriptor(Header, {});
-   // console.log(stubbed);
-    //var instance = TestUtils.renderIntoDocument(stubbed);
-    var component = React.render(Header, document.body);
-    // var testHelper = require('testHelper');
 
+    var HeaderWithRouterContext = StubRouterContext(Header)
+    var header = TestUtils.renderIntoDocument(<HeaderWithRouterContext />);
+    renderedItems = TestUtils.scryRenderedDOMComponentsWithTag(header, 'a'),
+    itemCount = renderedItems.length;
 
-    // var TestLocation = require('react-router/modules/locations/TestLocation');
-    // var routes = require('../../../routes/router');
-    // var div = document.createElement('div');
+    expect(itemCount).toBe(2);
 
-   // TestLocation.history = ['/hkgf'];
+    expect(React.findDOMNode(renderedItems[0]).textContent).toEqual('Dashboard');
+    expect(React.findDOMNode(renderedItems[1]).textContent).toEqual('About');
 
-    // Router.run(routes, function (Handler) {
-    //   var micah = TestUtils.renderIntoDocument(<Handler/>, div);
-    //   //var component = TestUtils.findRenderedComponentWithType(<Header/>, Handler);
-    //   console.log(micah);
-    //   // React.render(<Handler/>, div, function() {
-    //   //var element = TestUtils.findRenderedDOMComponentWithClass(component, 'nav');
-    //   //   expect(element).toBeDefined();
-    //   // });
-    // });
   });
 
 });
