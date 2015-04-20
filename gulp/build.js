@@ -64,7 +64,7 @@ gulp.task("webpack", function() {
 });
 
 gulp.task('build', ['clean'], function(cb) {
-  runSequence(['styles', 'assets', 'webpack'], cb);
+  runSequence(['styles', 'assets', 'webpack', 'copy'], cb);
 });
 
 gulp.task('browserSync', function() {
@@ -81,6 +81,15 @@ gulp.task('browserSync', function() {
 gulp.task('watch', function() {
   $.browserSync.reload();
   gulp.watch([buildConfig.appBase + '**/*'], ['build', $.browserSync.reload]);
+});
+
+gulp.task('copy', function(){
+  gulp.src([
+    './node_modules/coralui/build/js/libs/jquery.js',
+    './node_modules/coralui/build/js/libs/moment.js',
+    './node_modules/coralui/build/js/coral.min.js',
+    './node_modules/coralui/build/css/coral.min.css'
+  ]).pipe(gulp.dest('./build/'));
 });
 
 

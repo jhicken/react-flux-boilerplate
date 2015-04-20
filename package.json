@@ -6,7 +6,8 @@
     "react": "^0.13.0",
     "react-router": "^0.13.2",
     "superagent": "^0.21.0",
-    "baconjs": "^0.7.53"
+    "baconjs": "^0.7.53",
+    "coralui": "git+ssh://git@git.corp.adobe.com:Coral/CoralUI.git#3.0.0-pre25"
   },
   "devDependencies": {
     "assert": "^1.1.1",
