@@ -17,7 +17,7 @@ var SearchInput = React.createClass({
         </div>
         <SearchResults/>
       </div>
-    )
+    );
   }
 });
 
@@ -35,7 +35,7 @@ var SearchResults = React.createClass({
         searchResults: {
           user
         }
-      })
+      });
     });
   },
   render() {
@@ -47,21 +47,21 @@ var SearchResults = React.createClass({
           <div className="repo-list">
             <ul>
               {this.state.searchResults && this.state.searchResults.user.repos && this.state.searchResults.user.repos.map((repo) => {
-                return <li key={repo.id}>{repo.name}</li>
+                return <li key={repo.id}>{repo.name}</li>;
               })}
             </ul>
 
           </div>
         </div>
-      )
+      );
     } else {
-      results = <h1>No results match your query.</h1>
+      results = <h1>No results match your query.</h1>;
     }
     return (
       <div className='search-results'>
         {results}
       </div>
-    )
+    );
   }
 });
 
@@ -78,5 +78,3 @@ var UserInfo = React.createClass({
 });
 
 module.exports = SearchInput;
-
-
