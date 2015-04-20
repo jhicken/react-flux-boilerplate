@@ -8,4 +8,4 @@ gulp.task('dev', ['build'], function() {
   gulp.start('watch');
 });
 
-gulp.task('default', ['dev']);
+gulp.task('default', ['build','test']);

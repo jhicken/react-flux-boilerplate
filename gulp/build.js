@@ -52,7 +52,9 @@ gulp.task('styles', function() {
 gulp.task('assets', function() {
   return gulp.src(appAssets)
     .pipe(gulp.dest(buildDir))
-    .pipe($.size({title: 'assets'}));
+    .pipe($.size({
+      title: 'assets'
+    }));
 });
 
 gulp.task("webpack", function() {
@@ -81,7 +83,26 @@ gulp.task('watch', function() {
   gulp.watch([buildConfig.appBase + '**/*'], ['build', $.browserSync.reload]);
 });
 
-gulp.task('dev', ['build'], function() {
-  gulp.start('browserSync');
-  gulp.start('watch');
+
+
+gulp.task('test', function() {
+  return gulp.src('./app').pipe($.jest({
+    "collectCoverage": true,
+    "scriptPreprocessor": "../node_modules/babel-jest/index.js",
+    "testFileExtensions": [
+      "es6",
+      "js",
+      "jsx"
+    ],
+    "moduleFileExtensions": [
+      "js",
+      "json",
+      "es6",
+      "jsx"
+    ],
+    "unmockedModulePathPatterns": [
+      "../node_modules/react",
+      "../config/stubRouterContext.jsx"
+    ]
+  }));
 });
