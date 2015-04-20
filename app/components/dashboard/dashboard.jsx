@@ -4,7 +4,8 @@ var actions = require('../../actions/githubActions');
 
 var SearchInput = React.createClass({
   handleSearch(event) {
-    actions.searchUser.push(this.refs.searchInput.getDOMNode().value);
+    event.preventDefault();
+    actions.loadUser.push(this.refs.searchInput.getDOMNode().value);
   },
   render() {
     return (

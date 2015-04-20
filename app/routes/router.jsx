@@ -8,8 +8,16 @@ var StrippedLayout = require('../components/layouts/stripped-layout/stripped-lay
 var Dashboard = require('../components/dashboard/dashboard');
 var About = require('../components/about/about');
 
+var App = React.createClass({
+  render() {
+    return (
+      <RouteHandler/>
+    );
+  }
+});
+
 var routes = (
-  <Route handler={RouteHandler} name='app' path='/'>
+  <Route handler={App} name='app' path='/'>
     <Redirect from='/' to='/dashboard'/>
 
     <Route handler={BaseLayout}>
